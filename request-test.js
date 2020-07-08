@@ -3,9 +3,9 @@
 const axios = require('axios');
 
 const book = {
-    'author': 'Charles Dickens',
-    'title': 'Great Expectations',
-    'published': '1861-01-01'
+    'author': 'Oliver Sacks',
+    'title': 'The Man Who Mistook His Wife For a Hat',
+    'published': '1985-01-01'
   };
 
 axios.post('http://localhost:3000/books', book)
