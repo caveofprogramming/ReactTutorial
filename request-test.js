@@ -8,9 +8,9 @@ const book = {
     'published': '1985-01-01'
   };
 
-axios.post('http://localhost:3000/books', book)
+axios.delete('http://localhost:3000/books/12345')
 .then(response => {
-    console.log(error);
+    console.log(response);
 })
 .catch(error => {
     console.log(error);
