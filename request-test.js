@@ -3,12 +3,12 @@
 const axios = require('axios');
 
 const book = {
-    'author': 'Oliver Sacks',
-    'title': 'The Man Who Mistook His Wife For a Hat',
-    'published': '1985-01-01'
+    'author': 'V. S. Ramachandran',
+    'title': 'Phantoms in the Brain',
+    'published': '1998-01-01'
   };
 
-axios.post('http://localhost:3000/books', book)
+axios.put('http://localhost:3000/books/119', book)
 .then(response => {
     console.log(response);
 })

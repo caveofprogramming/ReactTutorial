@@ -13,10 +13,16 @@ router.get('/:id', function (req, res) {
   res.sendStatus(200);
 })
 
+// Update a book
 router.put('/:id', function (req, res) {
-
-  console.log('body', req.body);
-  res.sendStatus(200);
+  repository.update(req.params.id, req.body, (err, result) => {
+    if (err) {
+      res.status(500).json({ 'error': err.toString() });
+    }
+    else {
+      res.sendStatus(200);
+    }
+  });
 })
 
 router.delete('/:id', function (req, res) {
@@ -27,16 +33,14 @@ router.delete('/:id', function (req, res) {
 
 // Save a book
 router.post('/', function (req, res) {
-  repository.save(req.body, (err, result)=> {
-    if(err) {
+  repository.save(req.body, (err, result) => {
+    if (err) {
       res.status(500).json({ 'error': err.toString() });
     }
     else {
       res.sendStatus(200);
     }
   });
-
-  
 })
 
 router.get('/', function (req, res) {
