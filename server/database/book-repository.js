@@ -24,8 +24,8 @@ class BookRepository {
         this.pool.query('update books set ? where id = ?', [book, id], callback);
     }
 
-    delete() {
-
+    delete(id, callback) {
+        this.pool.query('delete from books where id = ?', id, callback);
     }
 }
 
