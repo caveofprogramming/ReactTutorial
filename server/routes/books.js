@@ -27,10 +27,16 @@ router.delete('/:id', function (req, res) {
 
 // Save a book
 router.post('/', function (req, res) {
-  console.log('post body', req.body);
+  repository.save(req.body, (err, result)=> {
+    if(err) {
+      res.status(500).json({ 'error': err.toString() });
+    }
+    else {
+      res.sendStatus(200);
+    }
+  });
 
-  repository.save(req.body);
-  res.sendStatus(200);
+  
 })
 
 router.get('/', function (req, res) {
