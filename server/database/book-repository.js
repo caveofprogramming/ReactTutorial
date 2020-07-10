@@ -12,12 +12,12 @@ class BookRepository {
         this.pool.query('insert into books set ?', book, callback);
     }
 
-    get(id) {
-
+    get(id, callback) {
+        this.pool.query('select * from books where id = ?', id, callback);
     }
 
-    getAll() {
-
+    getAll(callback) {
+        this.pool.query('select * from books', callback);
     }
 
     update(id, book, callback) {

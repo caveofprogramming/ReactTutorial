@@ -7,10 +7,16 @@ const BookRepository = require('../database/book-repository');
 
 let repository = new BookRepository(connectionPool);
 
+// Get a single book
 router.get('/:id', function (req, res) {
-
-  console.log('ID', req.params.id);
-  res.sendStatus(200);
+  repository.get(req.params.id, (err, result) => {
+    if (err) {
+      res.status(500).json({ 'error': err.toString() });
+    }
+    else {
+      res.status(200).json(result);
+    }
+  });
 })
 
 // Update a book
@@ -43,8 +49,16 @@ router.post('/', function (req, res) {
   });
 })
 
+// Get all the books
 router.get('/', function (req, res) {
-  res.send('books here!');
+  repository.getAll((err, result) => {
+    if (err) {
+      res.status(500).json({ 'error': err.toString() });
+    }
+    else {
+      res.status(200).json(result);
+    }
+  });
 });
 
 
