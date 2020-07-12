@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 
 class BookLibrary extends React.Component {
 
@@ -21,8 +21,30 @@ class BookLibrary extends React.Component {
     }
 
     render() {
+
+        let books = this.state.books.map(book => {
+            return (
+                <tr key={book.id}>
+                    <td>{book.author}</td>
+                    <td>{book.title}</td>
+                    <td>{book.published}</td>
+                </tr>
+            )
+        });
+
         console.log('render', this.state.books);
-        return ( <div>Library</div>);
+        return (
+            <div>
+                <table>
+                    <thead>
+                        <tr><th>Author</th><th>Title</th><th>Published</th></tr>
+                    </thead>
+                    <tbody>
+                        {books}
+                    </tbody>
+                </table>
+            </div>
+        );
     }
 }
 
