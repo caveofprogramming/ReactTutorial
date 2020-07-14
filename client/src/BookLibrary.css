@@ -2,6 +2,8 @@
 table {
     border-spacing: 3em 1em;
     margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th {
