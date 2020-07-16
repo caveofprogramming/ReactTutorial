@@ -1,24 +1,47 @@
 import React from 'react';
 import './Book.css';
 
-function Book() {
+class Book extends React.Component {
 
-    console.log('server url', process.env.REACT_APP_SERVER_URL);
+    constructor(props) {
+        super(props);
 
-    return (
-        <div>
-            <form>
-                <label htmlFor="author">Author:</label>
-                <input type="text" name="author" id="author" />
-                <label htmlFor="title">Title:</label>
-                <input type="text" name="title" id="title" />
-                <label htmlFor="published">Published:</label>
-                <input type="text" name="published" id="published" />
-                <input type="submit" value="Save" />
-            </form>
+        this.state = {
+            author: '',
+            title: '',
+            published: '',
+        }
 
-        </div>
-    );
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    render() {
+
+        console.log(this.state);
+        return (
+            <div>
+                <form>
+                    <label htmlFor="author">Author:</label>
+                    <input value={this.state.author} onChange={this.handleChange} type="text" name="author" id="author" />
+                    <label htmlFor="title">Title:</label>
+                    <input value={this.state.title} onChange={this.handleChange} type="text" name="title" id="title" />
+                    <label htmlFor="published">Published:</label>
+                    <input value={this.state.published} onChange={this.handleChange} type="text" name="published" id="published" />
+                    <input type="submit" value="Save" />
+                </form>
+
+            </div>
+        );
+    }
 }
 
 export default Book;
