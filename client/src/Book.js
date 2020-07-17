@@ -13,6 +13,12 @@ class Book extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event) {
+        console.log(this.state);
+        event.preventDefault();
     }
 
     handleChange(event) {
@@ -25,11 +31,9 @@ class Book extends React.Component {
     }
 
     render() {
-
-        console.log(this.state);
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="author">Author:</label>
                     <input value={this.state.author} onChange={this.handleChange} type="text" name="author" id="author" />
                     <label htmlFor="title">Title:</label>
