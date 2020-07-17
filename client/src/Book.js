@@ -1,5 +1,6 @@
 import React from 'react';
 import './Book.css';
+import axios from 'axios';
 
 class Book extends React.Component {
 
@@ -17,7 +18,24 @@ class Book extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
+        let { author, title, published } = this.state;
+
+        published += '-01-01';
+
+        const book = {
+            author: author,
+            title: title,
+            published: published,
+        }
+
+        axios.post(process.env.REACT_APP_SERVER_URL, book)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error=>{
+                console.log(error);
+            });
+
         event.preventDefault();
     }
 
