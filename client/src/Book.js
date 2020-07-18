@@ -1,6 +1,7 @@
 import React from 'react';
 import './Book.css';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class Book extends React.Component {
 
@@ -30,7 +31,7 @@ class Book extends React.Component {
 
         axios.post(process.env.REACT_APP_SERVER_URL, book)
             .then(result => {
-                console.log(result);
+                this.setState({ created: true });
             })
             .catch(error=>{
                 console.log(error);
@@ -49,6 +50,11 @@ class Book extends React.Component {
     }
 
     render() {
+
+        if(this.state.created) {
+            return <Redirect to='/' />;
+        }
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
