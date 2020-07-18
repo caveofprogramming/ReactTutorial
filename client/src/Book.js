@@ -36,6 +36,9 @@ class Book extends React.Component {
     }
 
     validate() {
+
+        this.showMessage('Something went wrong.');
+
         for(let field in this.validation) {
             const rule = this.validation[field].rule;
             const message = this.validation[field].message;
@@ -45,6 +48,14 @@ class Book extends React.Component {
                 console.log(field, rule, message, value);
             }
         }
+    }
+
+    showMessage(message) {
+        this.setState({ message: message });
+
+        setTimeout(()=>{
+            this.setState({ message: '' });
+        }, 3000);
     }
 
     handleSubmit(event) {
@@ -96,7 +107,9 @@ class Book extends React.Component {
                     <label htmlFor="published">Published:</label>
                     <input value={this.state.published} onChange={this.handleChange} type="text" name="published" id="published" />
                     <input type="submit" value="Save" />
+                    <div className="message">{this.state.message}</div>
                 </form>
+                
 
             </div>
         );

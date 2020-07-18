@@ -22,3 +22,9 @@ input[type="text"] {
 label {
     justify-self: end;
 }
+
+.message {
+    grid-column: 2/3;
+    color: red;
+    font-weight: bold;
+}
