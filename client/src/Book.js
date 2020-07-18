@@ -5,6 +5,23 @@ import { Redirect } from 'react-router-dom';
 
 class Book extends React.Component {
 
+    validation = {
+        author: {
+            rule: /^\S.{0,48}\S$/,
+            message: 'Author field must have 2-50 characters'
+        },
+
+        title: {
+            rule: /^\S.{0,68}\S$/,
+            message: 'Title field must have 2-70 characters'
+        },
+
+        published: {
+            rule: /^\d{4}$/,
+            message: 'Published date must be a 4-digit year'
+        }
+    }
+
     constructor(props) {
         super(props);
 
@@ -18,7 +35,21 @@ class Book extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    validate() {
+        for(let field in this.validation) {
+            const rule = this.validation[field].rule;
+            const message = this.validation[field].message;
+            const value = this.state[field];
+
+            if(!value.match(rule)) {
+                console.log(field, rule, message, value);
+            }
+        }
+    }
+
     handleSubmit(event) {
+        this.validate();
+
         let { author, title, published } = this.state;
 
         published += '-01-01';
