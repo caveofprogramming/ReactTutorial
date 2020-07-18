@@ -36,30 +36,35 @@ class Book extends React.Component {
     }
 
     validate() {
-
-        this.showMessage('Something went wrong.');
-
-        for(let field in this.validation) {
+        for (let field in this.validation) {
             const rule = this.validation[field].rule;
             const message = this.validation[field].message;
             const value = this.state[field];
 
-            if(!value.match(rule)) {
-                console.log(field, rule, message, value);
+            if (!value.match(rule)) {
+                this.showMessage(message);
+                return false;
             }
         }
+
+        return true;
     }
 
     showMessage(message) {
         this.setState({ message: message });
 
-        setTimeout(()=>{
+        setTimeout(() => {
             this.setState({ message: '' });
         }, 3000);
     }
-
+    
     handleSubmit(event) {
-        this.validate();
+        
+        event.preventDefault();
+        
+        if(!this.validate()) {
+            return;
+        }
 
         let { author, title, published } = this.state;
 
@@ -75,11 +80,10 @@ class Book extends React.Component {
             .then(result => {
                 this.setState({ created: true });
             })
-            .catch(error=>{
+            .catch(error => {
                 console.log(error);
             });
 
-        event.preventDefault();
     }
 
     handleChange(event) {
@@ -93,7 +97,7 @@ class Book extends React.Component {
 
     render() {
 
-        if(this.state.created) {
+        if (this.state.created) {
             return <Redirect to='/' />;
         }
 
@@ -109,7 +113,7 @@ class Book extends React.Component {
                     <input type="submit" value="Save" />
                     <div className="message">{this.state.message}</div>
                 </form>
-                
+
 
             </div>
         );
