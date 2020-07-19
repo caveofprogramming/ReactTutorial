@@ -30,6 +30,7 @@ class Book extends React.Component {
             author: '',
             title: '',
             published: '',
+            submitAttempts: 0,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -43,7 +44,7 @@ class Book extends React.Component {
             const value = this.state[field];
 
             if (!value.match(rule)) {
-                this.setState({ message: message });
+                this.setState({ message: message, submitAttempts: this.state.submitAttempts + 1 });
                 return false;
             }
         }
@@ -52,10 +53,10 @@ class Book extends React.Component {
     }
 
     handleSubmit(event) {
-        
+
         event.preventDefault();
-        
-        if(!this.validate()) {
+
+        if (!this.validate()) {
             return;
         }
 
@@ -104,7 +105,7 @@ class Book extends React.Component {
                     <label htmlFor="published">Published:</label>
                     <input value={this.state.published} onChange={this.handleChange} type="text" name="published" id="published" />
                     <input type="submit" value="Save" />
-                    <FlashMessage message={this.state.message} duration='3000'/>
+                    <FlashMessage key={this.state.submitAttempts} message={this.state.message} duration='3000' />
                 </form>
 
 
