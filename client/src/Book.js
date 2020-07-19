@@ -2,6 +2,7 @@ import React from 'react';
 import './Book.css';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import FlashMessage from './FlashMessage';
 
 class Book extends React.Component {
 
@@ -111,7 +112,7 @@ class Book extends React.Component {
                     <label htmlFor="published">Published:</label>
                     <input value={this.state.published} onChange={this.handleChange} type="text" name="published" id="published" />
                     <input type="submit" value="Save" />
-                    <div className="message">{this.state.message}</div>
+                    <FlashMessage message={this.state.message} duration='3000'/>
                 </form>
 
 
