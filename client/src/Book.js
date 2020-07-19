@@ -43,7 +43,7 @@ class Book extends React.Component {
             const value = this.state[field];
 
             if (!value.match(rule)) {
-                this.showMessage(message);
+                this.setState({ message: message });
                 return false;
             }
         }
@@ -51,14 +51,6 @@ class Book extends React.Component {
         return true;
     }
 
-    showMessage(message) {
-        this.setState({ message: message });
-
-        setTimeout(() => {
-            this.setState({ message: '' });
-        }, 3000);
-    }
-    
     handleSubmit(event) {
         
         event.preventDefault();
