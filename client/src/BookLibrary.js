@@ -15,13 +15,30 @@ class BookLibrary extends React.Component {
         this.state = {
             books: [],
         };
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
+        this.refresh();
+    }
 
+    refresh() {
         axios(process.env.REACT_APP_SERVER_URL)
-            .then(result => this.setState({ books: result.data }))
-            .catch(error => console.log(error));
+        .then(result => this.setState({ books: result.data }))
+        .catch(error => console.log(error));
+    }
+
+    handleDelete(id) {
+        console.log('delete', id);
+
+        axios.delete(process.env.REACT_APP_SERVER_URL + '/' + id)
+            .then(result => {
+                this.refresh();
+            }) 
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     render() {
@@ -36,7 +53,7 @@ class BookLibrary extends React.Component {
                     <td>{book.title}</td>
                     <td>{date}</td>
                     <td><Link to={'/edit/' + book.id}><EditIcon /></Link></td>
-                    <td><DeleteForeverIcon /></td>
+                    <td><Link onClick={() => { if(window.confirm('Really delete this book?')) {this.handleDelete(book.id)}}} to='/'><DeleteForeverIcon /></Link></td>
                 </tr>
             )
         });
