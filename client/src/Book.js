@@ -38,6 +38,26 @@ class Book extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            return;
+        }
+
+        axios.get(process.env.REACT_APP_SERVER_URL + '/' + this.state.id)
+            .then(result => {
+                let { author, title, published}  = result.data[0];
+
+                this.setState({
+                    author: author,
+                    title: title,
+                    published: published.substr(0, 4)
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     validate() {
         for (let field in this.validation) {
             const rule = this.validation[field].rule;
