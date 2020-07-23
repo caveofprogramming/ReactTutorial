@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { Link } from 'react-router-dom';
 import './BookLibrary.css';
 
 class BookLibrary extends React.Component {
@@ -34,7 +35,7 @@ class BookLibrary extends React.Component {
                     <td>{book.author}</td>
                     <td>{book.title}</td>
                     <td>{date}</td>
-                    <td><EditIcon /></td>
+                    <td><Link to={'/edit/' + book.id}><EditIcon /></Link></td>
                     <td><DeleteForeverIcon /></td>
                 </tr>
             )

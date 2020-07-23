@@ -1,7 +1,7 @@
 import React from 'react';
 import './Book.css';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import FlashMessage from './FlashMessage';
 
 class Book extends React.Component {
@@ -27,6 +27,7 @@ class Book extends React.Component {
         super(props);
 
         this.state = {
+            id: props.match.params.id,
             author: '',
             title: '',
             published: '',
@@ -114,4 +115,4 @@ class Book extends React.Component {
     }
 }
 
-export default Book;
+export default withRouter(Book);
