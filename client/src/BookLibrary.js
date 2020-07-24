@@ -10,8 +10,6 @@ class BookLibrary extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('book library')
-
         this.state = {
             books: [],
         };
@@ -30,8 +28,6 @@ class BookLibrary extends React.Component {
     }
 
     handleDelete(id) {
-        console.log('delete', id);
-
         axios.delete(process.env.REACT_APP_SERVER_URL + '/' + id)
             .then(result => {
                 this.refresh();
@@ -58,7 +54,6 @@ class BookLibrary extends React.Component {
             )
         });
 
-        console.log('render', this.state.books);
         return (
             <div>
                 <table>
