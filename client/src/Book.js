@@ -58,6 +58,10 @@ class Book extends React.Component {
             });
     }
 
+    errorMessage(message) {
+        this.setState({ message: message, submitAttempts: this.state.submitAttempts + 1 });
+    }
+
     validate() {
         for (let field in this.validation) {
             const rule = this.validation[field].rule;
@@ -65,7 +69,7 @@ class Book extends React.Component {
             const value = this.state[field];
 
             if (!value.match(rule)) {
-                this.setState({ message: message, submitAttempts: this.state.submitAttempts + 1 });
+                this.errorMessage(message);
                 return false;
             }
         }
@@ -105,7 +109,7 @@ class Book extends React.Component {
                 this.setState({ created: true });
             })
             .catch(error => {
-                console.log(error);
+                this.errorMessage(error.toString());
             });
 
     }
