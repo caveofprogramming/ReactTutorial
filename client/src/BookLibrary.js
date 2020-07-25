@@ -3,6 +3,7 @@ import axios from 'axios';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { Link } from 'react-router-dom';
+import FlashMessage from './FlashMessage';
 import './BookLibrary.css';
 
 class BookLibrary extends React.Component {
@@ -24,7 +25,7 @@ class BookLibrary extends React.Component {
     refresh() {
         axios(process.env.REACT_APP_SERVER_URL)
             .then(result => this.setState({ books: result.data }))
-            .catch(error => console.log(error));
+            .catch(error => this.setState({ errorMessage: error.toString() }));
     }
 
     handleDelete(id) {
@@ -65,13 +66,16 @@ class BookLibrary extends React.Component {
             </table>
         );
 
-        if(this.state.books.length === 0) {
+        if (this.state.books.length === 0) {
             content = <div className="book-table-message">No books found.</div>
         }
 
         return (
             <div className="book-table">
                 {content}
+                <div className="error-message">
+                    <FlashMessage message={this.state.errorMessage} duration='3000' />
+                </div>
             </div>
         );
     }
